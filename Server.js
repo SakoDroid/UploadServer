@@ -40,7 +40,7 @@ app.post("/Upload",(req,res)=>{
 });
 
 app.get("/dl",(req,res)=>{
-    let dir = __dirname + "/doc/" + req.query.file_name;
+    let dir = __dirname + "/doc/" + decodeURIComponent(req.query.file_name);
     console.log("request for downloading " + dir + " , from : " + req.ip.split(":")[3]);
     if(fs.existsSync(dir)){
         res.download(dir);
@@ -51,10 +51,11 @@ app.get("/dl",(req,res)=>{
 });
 
 app.get("/files",(req,res)=>{
+    console.log("request for files list from : " + req.ip.split(":")[3]);
     let files = fs.readdirSync(__dirname + "/doc");
     let o = "<html><head><title>Files list</title></head><body><h1>Files list</h1><hr/>";
     for (let i in files){
-        o += "<a href='/dl?file_name='" + files[i] +"'>" + files[i] + "</a><br/>";
+        o += "<a href='" + "/dl?file_name=" + encodeURIComponent(files[i]) + "'>" + files[i] + "</a><br/><hr/>";
     }
     o += "</body></html>";
     res.send(o);
