@@ -8,12 +8,12 @@ const date = new Date();
 app.use(fu({limits: { fileSize: 50 * 1024 * 1024 }}));
 
 app.get("/",(req,res)=>{
-    console.log("request for main page from " + req.ip.split(":")[3] + "| " + date.toDateString());
+    console.log("request for main page from " + req.ip.split(":")[3] + "| " + date.toString());
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/Upload",(req,res)=>{
-    console.log("request for Upload from " + req.ip.split(":")[3] + "| " + date.toDateString());
+    console.log("request for Upload from " + req.ip.split(":")[3] + "| " + date.toString());
     let files = req.files;
    if (files.length === 0){
        res.status(400).send("No file is uploaded!");
@@ -33,19 +33,19 @@ app.post("/Upload",(req,res)=>{
 
            app.get("/doc/" + files[i].name,(req,res)=>{
                console.log("request for online view of the " + dir + " , from : " + req.ip.split(":")[3]
-                   + "| " + date.toDateString());
+                   + "| " + date.toString());
                res.sendFile(dir);
            });
        }
        o += "</body></html>";
        res.send(o);
-       console.log(files.length + " files uploaded requested by : " + req.ip.split(":")[3] + "| " + date.toDateString());
+       console.log(files.length + " files uploaded requested by : " + req.ip.split(":")[3] + "| " + date.toString());
    }
 });
 
 app.get("/dl",(req,res)=>{
     let dir = __dirname + "/doc/" + decodeURIComponent(req.query.file_name);
-    console.log("request for downloading " + dir + " , from : " + req.ip.split(":")[3]  + "| " + date.toDateString());
+    console.log("request for downloading " + dir + " , from : " + req.ip.split(":")[3]  + "| " + date.toString());
     if(fs.existsSync(dir)){
         res.download(dir);
     }else{
@@ -55,7 +55,7 @@ app.get("/dl",(req,res)=>{
 });
 
 app.get("/files",(req,res)=>{
-    console.log("request for files list from : " + req.ip.split(":")[3]  + "| " + date.toDateString());
+    console.log("request for files list from : " + req.ip.split(":")[3]  + "| " + date.toString());
     let files = fs.readdirSync(__dirname + "/doc");
     let o = "<html><head><title>Files list</title></head><body><h1>Files list</h1><hr/>";
     for (let i in files){
@@ -66,5 +66,5 @@ app.get("/files",(req,res)=>{
 });
 
 app.listen(8081,()=>{
-    console.log("listening on port 8081"  + "| " + date.toDateString());
+    console.log("listening on port 8081"  + "| " + date.toString());
 });
