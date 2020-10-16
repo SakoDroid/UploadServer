@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File upload</title>
+</head>
+<body>
+    <form id="up" action="/Upload" method="POST" enctype="multipart/form-data" >
+        <h1>File Upload</h1><hr/>
+        <input type="file" name="file1"><br/><br/>
+        <input type="file" name="file2"><br/><br/>
+        <input type="file" name="file2"><br/><br/>
+        <input type="file" name="file4"><br/><br/>
+        <input type="file" name="file5"><br/><br/>
+        <input type="submit" value="Upload!">
+        <input type="button" value="add more files" onclick="addFile()"/><hr/>
+    </form>
+    <script type="text/javascript" >function addFile(){
+        let form = document.getElementById("up");
+        let new_file = document.createElement("input");
+        let target = form.getElementsByTagName("input")[form.getElementsByTagName("input").length-2];
+        new_file.type = "file";
+        new_file.name = "file" + (form.getElementsByTagName("input").length-2);
+        form.insertBefore(new_file,target);
+        form.insertBefore(document.createElement("br"),target);
+        form.insertBefore(document.createElement("br"),target);
+    }
+    </script>
+</body>
+</html>
