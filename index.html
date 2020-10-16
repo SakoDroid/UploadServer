@@ -16,14 +16,18 @@
         <input type="button" value="add more files" onclick="addFile()"/><hr/>
     </form>
     <script type="text/javascript" >function addFile(){
-        let form = document.getElementById("up");
-        let new_file = document.createElement("input");
-        let target = form.getElementsByTagName("input")[form.getElementsByTagName("input").length-2];
-        new_file.type = "file";
-        new_file.name = "file" + (form.getElementsByTagName("input").length-2);
-        form.insertBefore(new_file,target);
-        form.insertBefore(document.createElement("br"),target);
-        form.insertBefore(document.createElement("br"),target);
+       if (document.getElementById("form").getElementsByTagName("input").length < 12){
+           let form = document.getElementById("up");
+           let new_file = document.createElement("input");
+           let target = form.getElementsByTagName("input")[form.getElementsByTagName("input").length-2];
+           new_file.type = "file";
+           new_file.name = "file" + (form.getElementsByTagName("input").length-2);
+           form.insertBefore(new_file,target);
+           form.insertBefore(document.createElement("br"),target);
+           form.insertBefore(document.createElement("br"),target);
+       }else{
+           alert("No more file can be added!");
+       }
     }
     </script>
 </body>
