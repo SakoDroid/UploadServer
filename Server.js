@@ -6,10 +6,12 @@ const app = ex();
 app.use(fu({limits: { fileSize: 50 * 1024 * 1024 }}));
 
 app.get("/",(req,res)=>{
+    console.log("request for main page from " + req.ip.split(":")[3]);
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/Upload",(req,res)=>{
+    console.log("request for Upload from " + req.ip.split(":")[3]);
     let files = req.files;
    if (files.length === 0){
        res.status(400).send("No file is uploaded!");
@@ -33,11 +35,13 @@ app.post("/Upload",(req,res)=>{
        }
        o += "</body></html>";
        res.send(o);
+       console.log(files.length + " files uploaded requested by : " + req.ip.split(":")[3]);
    }
 });
 
 app.get("/dl",(req,res)=>{
     let dir = __dirname + "/doc/" + req.query.file_name;
+    console.log("request for downloading " + dir + " , from : " + req.ip.split(":")[3]);
     if(fs.existsSync(dir)){
         res.download(dir);
     }else{
@@ -45,4 +49,6 @@ app.get("/dl",(req,res)=>{
             "<h1>File not found!</h1><p>The file you requested is not located on the server!</p></body></html>");
     }
 });
-app.listen(8081);
+app.listen(8081,()=>{
+    console.log("listening on port 8081");
+});
