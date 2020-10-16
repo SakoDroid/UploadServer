@@ -49,6 +49,17 @@ app.get("/dl",(req,res)=>{
             "<h1>File not found!</h1><p>The file you requested is not located on the server!</p></body></html>");
     }
 });
+
+app.get("/files",(req,res)=>{
+    let files = fs.readdirSync(__dirname + "/doc");
+    let o = "<html><head><title>Files list</title></head><body><h1>Files list</h1><hr/>";
+    for (let i in files){
+        o += "<a href='/dl?file_name='" + files[i] +"'>" + files[i] + "</a><br/>";
+    }
+    o += "</body></html>";
+    res.send(o);
+});
+
 app.listen(8081,()=>{
     console.log("listening on port 8081");
 });
