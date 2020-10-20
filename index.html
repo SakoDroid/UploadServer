@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>File upload</title>
 </head>
-<body>
-    <form id="up" action="/Upload" method="POST" enctype="multipart/form-data" >
-        <h1>File Upload</h1><hr/>
-        <input type="file" name="file1"><br/><br/>
-        <input type="file" name="file2"><br/><br/>
-        <input type="file" name="file2"><br/><br/>
-        <input type="file" name="file4"><br/><br/>
-        <input type="file" name="file5"><br/><br/>
-        <input type="submit" value="Upload!">
-        <input type="button" value="add more files" onclick="addFile()"/><hr/>
-        <input type="button" value="Show me all the files!" onclick="window.open('/files')"/>
-    </form>
+<body >
+    <h1 style="color: powderblue;position: relative;
+  width: 500px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 39%;
+  ;font-size: 75px">File Upload</h1>
+    <div >
+        <form style="margin : auto" id="uo" action="/Upload" method="POST" enctype="multipart/form-data" ><br/>
+            <input class="file" type="file" name="file1"><br/><br/>
+            <input class="file" type="file" name="file2"><br/><br/>
+            <input class="file" type="file" name="file2"><br/><br/>
+            <input class="file" type="file" name="file4"><br/><br/>
+            <input class="file" type="file" name="file5"><br/><br/>
+            <input class="up" type="submit" value="Upload!">
+            <input class="add" type="button" value="add more files" onclick="addFile()"/><br/>
+        </form>
+    </div><br/><br/>
+    <input class="files" type="button" value="Show me all the files!" onclick="window.open('/files')"/>
     <script type="text/javascript" >function addFile(){
-       if (document.getElementById("form").getElementsByTagName("input").length < 12){
-           let form = document.getElementById("up");
+       if (document.getElementById("uo").getElementsByTagName("input").length < 13){
+           let form = document.getElementById("uo");
            let new_file = document.createElement("input");
-           let target = form.getElementsByTagName("input")[form.getElementsByTagName("input").length-2];
+           let target = form.getElementsByTagName("input")[form.getElementsByTagName("input").length-3];
            new_file.type = "file";
-           new_file.name = "file" + (form.getElementsByTagName("input").length-2);
+           new_file.name = "file" + (form.getElementsByTagName("input").length-3);
+           new_file.className = "file";
            form.insertBefore(new_file,target);
            form.insertBefore(document.createElement("br"),target);
            form.insertBefore(document.createElement("br"),target);
