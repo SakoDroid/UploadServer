@@ -8,7 +8,7 @@ const date = new Date();
 
 app.use(fu({limits: { fileSize: 50 * 1024 * 1024 }}));
 app.use(ex.static(__dirname + "/doc/"));
-app.use(b.urlencoded({extended : false}));
+app.use(ex.static(__dirname));
 let pr = 0;
 app.get("/",(req,res)=>{
     console.log("request for main page from " + req.ip.split(":")[3] + "| " + date.toString());
