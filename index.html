@@ -7,14 +7,11 @@
     <title>File upload</title>
 </head>
 <body >
-    <h1 style="color: powderblue;position: relative;
-  width: 500px;
-  height: 200px;
-  z-index: 15;
-  top: 50%;
-  left: 39%;
-  ;font-size: 75px">File Upload</h1>
-    <div >
+    <h1 style="color: powderblue;
+    text-align: center;
+    margin: auto;
+    font-size: 75px">File Upload</h1>
+    <div style="margin: auto;">
         <form style="margin : auto" id="uo" action="/Upload" method="POST" enctype="multipart/form-data" ><br/>
             <input class="file" type="file" name="file1"><br/><br/>
             <input class="file" type="file" name="file2"><br/><br/>
@@ -24,8 +21,8 @@
             <input class="up" type="submit" value="Upload!">
             <input class="add" type="button" value="add more files" onclick="addFile()"/><br/>
         </form>
+        <input class="files" type="button" value="Show me all the files!" onclick="window.open('/files')"/>
     </div><br/><br/>
-    <input class="files" type="button" value="Show me all the files!" onclick="window.open('/files')"/>
     <script type="text/javascript" >function addFile(){
        if (document.getElementById("uo").getElementsByTagName("input").length < 13){
            let form = document.getElementById("uo");
