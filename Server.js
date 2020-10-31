@@ -9,7 +9,6 @@ const date = new Date();
 app.use(fu({limits: { fileSize: 50 * 1024 * 1024 }}));
 app.use(ex.static(__dirname + "/doc/"));
 app.use(ex.static(__dirname));
-let pr = 0;
 app.get("/",(req,res)=>{
     console.log("request for main page from " + req.ip.split(":")[3] + "| " + date.toString());
     res.sendFile(__dirname + "/index.html");
@@ -58,7 +57,6 @@ app.get("/dl",(req,res)=>{
 });
 
 app.get("/files",(req,res)=>{
-    if(pr === 1){
         console.log("request for files list from : " + req.ip.split(":")[3] + "| " + date.toString());
         let files = fs.readdirSync(__dirname + "/doc");
         let o = "<html><head><title>Files list</title></head><body><h1>Files list</h1><hr/>";
@@ -69,9 +67,6 @@ app.get("/files",(req,res)=>{
         }
         o += "</body></html>";
         res.send(o);
-    }else{
-        res.send("<html><head><title>Access Denied!</title></head><body><h1>Access Denied!</h1></body></html>")
-    }
 });
 
 app.listen(8081,()=>{
